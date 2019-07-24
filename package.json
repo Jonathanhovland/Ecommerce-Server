@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Jonathanhovland/Ecommerce-Server#readme",
   "devDependencies": {
+    "eslint": "^6.1.0",
     "nodemon": "^1.19.1"
   },
   "dependencies": {
