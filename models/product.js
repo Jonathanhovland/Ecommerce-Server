@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
   //eslint-disable-next-line
   Product.associate = function(models) {
     // associations can be defined here
+    Product.belongsTo(models.Category, {
+      foreignKey: "category_id"
+    })
   }
+  
   return Product
 }
