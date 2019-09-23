@@ -1,6 +1,10 @@
+require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
+
+console.log(process.env.STRIPE_SECRET_KEY)
 
 const PORT = process.env.PORT || 4000
 const app = express()
