@@ -12,6 +12,7 @@ const app = express()
 // Middleware
 app.use(cors())
 app.use(morgan("dev"))
+app.use(express.json())
 
 // Sequelize Models
 const db = require("./models")
@@ -65,6 +66,26 @@ app.get("/products/:id", (req, res, next) => {
     })
 })
 
+app.post("/api/checkout", async (req, res, next) => {
+  const lineItem = req.body
+  const lineItems = [lineItem]
+
+  try {
+    // Create the session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      success_url: "http://localhost:3000/success",
+      cancel_url: "http://localhost:3000/cancel"
+    })
+    
+    // Send session to the client
+    res.json({ session })
+  }
+  catch (error) {
+    next(error)
+  }
+})
 
 
 // Error handling
